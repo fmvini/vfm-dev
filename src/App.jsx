@@ -2,8 +2,8 @@
 import { certifications, profile, skills } from './data/profile.js'
 
 const nav = [
-  ['sobre', 'Sobre'],
   ['projetos', 'Projetos'],
+  ['sobre', 'Sobre'],
   ['habilidades', 'Habilidades'],
   ['formacao', 'Formação'],
   ['contato', 'Contato'],
@@ -23,8 +23,16 @@ function useTheme() {
   return [theme, setTheme]
 }
 
-function SectionHeading({ id, children, aside }) {
-  return <div className="section-heading"><h2 id={id}>{children}</h2>{aside && <p>{aside}</p>}</div>
+function ArrowUpRight() {
+  return <svg className="arrow-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 16 16 4M6 4h10v10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+}
+
+function ArrowDown() {
+  return <svg className="arrow-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v13m0 0 5-5m-5 5-5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+}
+
+function SectionHeading({ id, children }) {
+  return <div className="section-heading"><h2 id={id}>{children}</h2></div>
 }
 
 function App() {
@@ -62,64 +70,66 @@ function App() {
 
     <main id="conteudo">
       <section id="inicio" className="hero section-shell" aria-labelledby="hero-title">
-        <div className="hero-topline"><span>Portfólio / Desenvolvimento de software</span><span>Socorro · SP</span></div>
+        <div className="hero-topline"><span className="availability"><span className="availability-dot" aria-hidden="true" />Aberto a estágio e posições júnior</span><span>Socorro, SP · Remoto ou presencial</span></div>
         <div className="hero-core">
           <div>
             <h1 id="hero-title">Vinícius<br /><em>Fatichi</em><br />Marrocos<span className="period">.</span></h1>
           </div>
           <div className="hero-side">
-            <p className="hero-role">Estudante de ADS<br />&amp; desenvolvedor full stack</p>
-            <p>Transformo estudo em aplicações reais, do banco de dados à experiência de quem usa.</p>
+            <p className="hero-role">Desenvolvedor full stack<br />em formação.</p>
+            <p>No VFitness, conectei React, FastAPI e PostgreSQL para organizar treinos e acompanhar a evolução de usuários.</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#projetos">Ver projeto <span aria-hidden="true">↗</span></a>
-              <a className="text-link" href="#contato">Entrar em contato <span aria-hidden="true">↗</span></a>
+              <a className="button button-primary" href="#projetos">Conhecer VFitness <ArrowUpRight /></a>
+              <a className="text-link" href="#contato">Entrar em contato <ArrowUpRight /></a>
             </div>
           </div>
         </div>
-        <div className="hero-bottomline"><span>React · Python · FastAPI · PostgreSQL</span><a href="#sobre">Explorar o portfólio ↓</a></div>
-      </section>
-
-      <section id="sobre" className="content-section section-shell about-section" aria-labelledby="sobre-title">
-        <SectionHeading id="sobre-title" aside="Perfil">Sobre mim</SectionHeading>
-        <div className="about-grid">
-          <p className="lead-copy">Desenvolvo soluções completas enquanto curso Análise e Desenvolvimento de Sistemas no IFSP.</p>
-          <div className="body-copy">
-            <p>Tenho experiência prática em projetos pessoais com React, Node.js, FastAPI e bancos de dados relacionais. No VFitness, trabalhei desde a API e autenticação até testes e publicação em produção.</p>
-            <p>{profile.objective} {profile.availability}</p>
-            <p>Uso Git e GitHub no desenvolvimento, estudo novas tecnologias com autonomia e tenho inglês avançado/fluente.</p>
-          </div>
-        </div>
+        <div className="hero-bottomline"><span>VFitness: interface, API e banco de dados.</span><a href="#projetos">Ver trabalho selecionado <ArrowDown /></a></div>
       </section>
 
       <section id="projetos" className="content-section project-section" aria-labelledby="projetos-title">
-        <div className="section-shell"><SectionHeading id="projetos-title" aside="Projeto em destaque">Projetos</SectionHeading></div>
+        <div className="section-shell"><SectionHeading id="projetos-title">Projeto em destaque</SectionHeading></div>
         <article className="project-feature section-shell">
           <div className="project-intro">
-            <div className="project-title"><span className="project-tag">Aplicação full stack</span><h3>VFitness<span className="period">.</span></h3></div>
+            <div className="project-title"><span className="project-tag">Desenvolvimento full stack</span><h3>VFitness<span className="period">.</span></h3></div>
             <p>Uma aplicação para organizar treinos físicos, registrar exercícios e acompanhar a evolução de cada usuário.</p>
-            <a className="text-link" href={profile.github} target="_blank" rel="noopener noreferrer">Explorar meu GitHub <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={profile.github} target="_blank" rel="noopener noreferrer">Ver meu perfil no GitHub <ArrowUpRight /></a>
           </div>
           <div className="project-detail">
-            <div className="project-diagram" aria-label="Fluxo da aplicação VFitness: interface React, API FastAPI e banco PostgreSQL">
-              <div><small>Interface</small><strong>React</strong></div><span aria-hidden="true">→</span><div><small>API REST</small><strong>FastAPI</strong></div><span aria-hidden="true">→</span><div><small>Dados</small><strong>PostgreSQL</strong></div>
+            <div className="project-poster" aria-label="VFitness: treinos, registro de exercícios e acompanhamento de evolução">
+              <div className="poster-top"><span>VFitness</span><span>Aplicação web</span></div>
+              <div className="poster-center"><span className="poster-mark" aria-hidden="true">VF</span><p>Treinar.<br />Registrar.<br /><em>Evoluir.</em></p></div>
+              <div className="poster-bottom"><span>Treinos</span><span>Exercícios</span><span>Evolução</span></div>
             </div>
-            <div className="project-facts">
-              <div><h4>O que foi desenvolvido</h4><p>Front-end em React integrado à API REST em Python. Banco PostgreSQL com migrações Alembic e integração com Supabase.</p></div>
-              <div><h4>Segurança e entrega</h4><p>Autenticação Google OAuth, controle de acesso, testes automatizados e deploy de front-end e back-end na Vercel.</p></div>
-            </div>
-            <p className="tech-line"><span>Tecnologias</span> Python · FastAPI · React · PostgreSQL · Alembic · Supabase · Vercel</p>
+            <dl className="project-facts">
+              <div><dt>Interface e API</dt><dd>React consumindo uma API REST desenvolvida em Python com FastAPI.</dd></div>
+              <div><dt>Dados e acesso</dt><dd>PostgreSQL, migrações Alembic, Supabase e autenticação Google OAuth com controle de acesso.</dd></div>
+              <div><dt>Testes e produção</dt><dd>Testes automatizados e deploy de front-end e back-end na Vercel, com variáveis de ambiente e CORS.</dd></div>
+            </dl>
           </div>
         </article>
       </section>
 
+      <section id="sobre" className="content-section section-shell about-section" aria-labelledby="sobre-title">
+        <SectionHeading id="sobre-title">Sobre mim</SectionHeading>
+        <div className="about-grid">
+          <p className="lead-copy">Sou estudante de ADS no IFSP e construí o VFitness de ponta a ponta.</p>
+          <div className="body-copy">
+            <p>Estudo desenvolvimento de software colocando cada etapa em prática: interface, API, banco de dados, testes e publicação. Trabalho principalmente com Python, JavaScript e Java.</p>
+            <p>{profile.objective} {profile.availability}</p>
+            <p>Uso Git e GitHub para organizar meu trabalho e tenho inglês avançado/fluente.</p>
+          </div>
+        </div>
+      </section>
+
       <section id="habilidades" className="content-section section-shell" aria-labelledby="habilidades-title">
-        <SectionHeading id="habilidades-title" aside="Ferramentas e conhecimentos">Habilidades</SectionHeading>
+        <SectionHeading id="habilidades-title">Habilidades</SectionHeading>
         <div className="skills-grid">{skills.map(group => <div className="skill-group" key={group.title}><h3>{group.title}</h3><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div>
         <div className="additional-skills"><strong>Também aplico</strong><p>APIs REST, OAuth Google, testes automatizados, controle de acesso, CORS, variáveis de ambiente e segurança de dados.</p><p><strong>Idiomas:</strong> português nativo · inglês avançado/fluente.</p></div>
       </section>
 
       <section id="formacao" className="content-section section-shell education-section" aria-labelledby="formacao-title">
-        <SectionHeading id="formacao-title" aside="Aprendizado contínuo">Formação</SectionHeading>
+        <SectionHeading id="formacao-title">Formação</SectionHeading>
         <div className="education-grid">
           <div className="education-main"><span className="date-range">2026 — 2028 (previsão)</span><h3>Tecnólogo em Análise e Desenvolvimento de Sistemas</h3><p>IFSP · Instituto Federal de São Paulo<br />Campus Bragança Paulista</p><span className="education-status">Cursando o 2º período</span></div>
           <div className="certifications"><h3>Cursos e certificações</h3><ul>{certifications.map(item => <li key={item}>{item}</li>)}</ul></div>
@@ -128,14 +138,14 @@ function App() {
       </section>
 
       <section id="contato" className="contact-section" aria-labelledby="contato-title"><div className="section-shell">
-        <SectionHeading id="contato-title" aside="Vamos conversar">Contato</SectionHeading>
+        <SectionHeading id="contato-title">Contato</SectionHeading>
         <div className="contact-grid">
-          <div className="contact-copy"><h3>Tem uma oportunidade ou quer trocar uma ideia?</h3><p>Estou aberto a estágios e posições júnior em desenvolvimento de software.</p><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email} <span aria-hidden="true">↗</span></a><div className="contact-links"><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href={`https://wa.me/${profile.phone}`} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></div></div>
-          <form className="contact-form" onSubmit={handleContact}><p>Escreva sua mensagem. O envio será feito pelo seu aplicativo de e-mail.</p><label htmlFor="name">Nome</label><input id="name" name="name" autoComplete="name" required /><label htmlFor="email">E-mail</label><input id="email" name="email" type="email" autoComplete="email" required /><label htmlFor="message">Mensagem</label><textarea id="message" name="message" rows="4" required /><button className="button button-primary" type="submit">Preparar e-mail <span aria-hidden="true">↗</span></button><p className="form-status" role="status">{contactStatus}</p></form>
+          <div className="contact-copy"><h3>Disponível para estágio ou posição júnior.</h3><p>Se o VFitness ou minhas habilidades atendem o que sua equipe procura, escreva por e-mail ou LinkedIn.</p><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email} <ArrowUpRight /></a><div className="contact-links"><a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <ArrowUpRight /></a><a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub <ArrowUpRight /></a><a href={`https://wa.me/${profile.phone}`} target="_blank" rel="noopener noreferrer">WhatsApp <ArrowUpRight /></a></div></div>
+          <form className="contact-form" onSubmit={handleContact}><p>Escreva sua mensagem. O envio será feito pelo seu aplicativo de e-mail.</p><label htmlFor="name">Nome</label><input id="name" name="name" autoComplete="name" required /><label htmlFor="email">E-mail</label><input id="email" name="email" type="email" autoComplete="email" required /><label htmlFor="message">Mensagem</label><textarea id="message" name="message" rows="4" required /><button className="button button-primary" type="submit">Preparar e-mail <ArrowUpRight /></button><p className="form-status" role="status">{contactStatus}</p></form>
         </div>
       </div></section>
     </main>
-    <footer className="site-footer section-shell"><span>© {new Date().getFullYear()} Vinícius Fatichi Marrocos</span><span>Feito em Socorro, SP</span><a href="#inicio">Voltar ao topo ↑</a></footer>
+    <footer className="site-footer section-shell"><span>© {new Date().getFullYear()} Vinícius Fatichi Marrocos</span><span>Feito em Socorro, SP</span><a href="#inicio">Voltar ao topo</a></footer>
   </>
 }
 
